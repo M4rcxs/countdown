@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='20' font-size='20'>✈️</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Webcrumbs Plugin</title>
+    <title>Contagem Regressiva</title>
     <style>
       @import url(https://fonts.googleapis.com/css2?family=Lato&display=swap);
       @import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
@@ -114,6 +115,8 @@
                 >
               </button>
               <button
+                id="share-button"
+
                 class="flex items-center gap-2 bg-purple-500 text-white px-4 py-2 transition-transform duration-100 hover:translate-y-[-2px] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
               >
                 <span class="material-symbols-outlined relative z-10"
@@ -352,6 +355,21 @@
 
         // Initialize countdown on page load
         updateCountdown();
+        document.getElementById("share-button").addEventListener("click", async () => {
+        if (navigator.share) {
+        try {
+            await navigator.share({
+            title: "Contagem Regressiva 🎉",
+            text: "Acompanhe a contagem regressiva das Férias do Marcos e da Maria 🥳🛫 :",
+            url: "https://m4rcxs.github.io/countdown/",
+            });
+        } catch (error) {
+            console.error("Erro ao compartilhar:", error);
+        }
+        } else {
+        alert("Seu navegador não suporta compartilhamento nativo.");
+        }
+    });
     </script>
   </body>
 </html>
