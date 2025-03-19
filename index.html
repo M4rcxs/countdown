@@ -105,6 +105,7 @@
             </div>
             <div class="flex items-center justify-center gap-4 mb-6 relative">
               <button
+              id="reminder-button"
                 class="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 transition-transform duration-100 hover:translate-y-[-2px] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
               >
                 <span class="material-symbols-outlined relative z-10"
@@ -369,6 +370,28 @@
         } else {
         alert("Seu navegador não suporta compartilhamento nativo.");
         }
+        
+        document.getElementById("reminder-button").addEventListener("click", async () => {
+        if ("Notification" in window) {
+        if (Notification.permission === "granted") {
+            new Notification("Lembrete", {
+            body: "Faltam 3 dias para as férias começarem! 🥳🎉",
+            icon: "https://m4rcxs.github.io/countdown/favicon.ico",
+            });
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+                new Notification("Lembrete", {
+                body: "Faltam 3 dias para as férias começarem! 🥳🎉",
+                icon: "https://m4rcxs.github.io/countdown/favicon.ico",
+                });
+            }
+            });
+        }
+        } else {
+        alert("Seu navegador não suporta notificações.");
+        }
+        });
     });
     </script>
   </body>
